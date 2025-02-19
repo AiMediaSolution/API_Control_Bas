@@ -39,7 +39,13 @@ function getDataByAccountId(accountId, callback) {
 }
 
 function getAllData(callback) {
-  db.all(`SELECT * FROM data`, [], callback);
+  db.all(
+    `SELECT d.*, a.userName
+    FROM data d JOIN account a
+    ON d.account_Id = a.account_Id;`,
+    [],
+    callback
+  );
 }
 function getAllDataProcessing(callback) {
   db.all(`SELECT * FROM data WHERE = "processing"`, [], callback);
